@@ -28,7 +28,7 @@ module.exports = function (port, opts) {
 	return new Promise(function (resolve, reject) {
 		var cmd = command(port);
 
-		execa.shell(cmd.cmd).then(result => {
+		execa.shell(cmd.cmd).then(function (result) {
 			var _err = result.error || result.stderr;
 			if (_err) {
 				reject(_err);
