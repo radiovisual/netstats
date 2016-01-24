@@ -1,0 +1,43 @@
+{
+  "name": "netstats",
+  "version": "0.0.0",
+  "description": "Get the netstat activity on a given port.",
+  "license": "MIT",
+  "repository": "radiovisual/netstats",
+  "author": {
+    "name": "Michael Wuergler",
+    "email": "wuergler@gmail.com",
+    "url": "numetriclabs.com"
+  },
+  "engines": {
+    "node": ">=0.10.0"
+  },
+  "scripts": {
+    "test": "xo && ava --verbose"
+  },
+  "files": [
+    "index.js"
+  ],
+  "keywords": [
+    "netstat",
+    "lsof",
+    "net",
+    "stat",
+    "port",
+    "tcp",
+    "udp",
+    "activity"
+  ],
+  "dependencies": {
+    "execa": "^0.2.2",
+    "native-promise-only": "^0.8.1"
+  },
+  "devDependencies": {
+    "ava": "^0.8.0",
+    "express": "^4.13.4",
+    "xo": "^0.12.1"
+  },
+  "ava": {
+    "verbose": true
+  }
+}
