@@ -1,5 +1,7 @@
 import test from 'ava';
 import netstats from './';
+import condense from 'selective-whitespace';
+
 const server = require('express')();
 
 test.beforeEach(t => {
@@ -13,7 +15,8 @@ test('gets the netstats', async t => {
 	await netstats(t.context.port).then(stats => {
 		t.plan(3);
 
-		const value = stats[0].split(' ')[0];
+		const v = condense(stats[0]);
+		const value = v.split(' ')[0];
 		t.true(value === 'COMMAND' || value === 'TCP' || value === 'UDP');
 		t.true(stats.length > 0);
 		t.true(Array.isArray(stats));

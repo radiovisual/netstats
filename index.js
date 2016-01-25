@@ -1,12 +1,12 @@
 'use strict';
-var execa = require('execa');
 require('native-promise-only');
+var exec = require('child_process').exec;
 
 function command(port) {
 	var win = {
 		exe: '\\windows\\system32\\netstat.exe',
-		arg: ['-a -n -o | findstr :' + port],
-		cmd: '\\windows\\system32\\netstat.exe -a -n -o | findstr :' + port
+		arg: ['-a -n -o ^| findstr :' + port],
+		cmd: '\\windows\\system32\\netstat.exe -a -n -o | findstr.exe :' + port
 	};
 
 	var dar = {
@@ -28,12 +28,12 @@ module.exports = function (port, opts) {
 	return new Promise(function (resolve, reject) {
 		var cmd = command(port);
 
-		execa.shell(cmd.cmd).then(function (result) {
-			var _err = result.error || result.stderr;
+		exec(cmd.cmd, function (err, stdout, stderr) {
+			var _err = err || stderr;
 			if (_err) {
 				reject(_err);
 			}
-			resolve(result.stdout.split('\n'));
+			resolve(stdout.split('\n'));
 		});
 	});
 };

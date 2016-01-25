@@ -1,6 +1,6 @@
 {
   "name": "netstats",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "description": "Get the netstat activity on a given port.",
   "license": "MIT",
   "repository": "radiovisual/netstats",
@@ -29,15 +29,20 @@
     "activity"
   ],
   "dependencies": {
-    "execa": "^0.2.2",
     "native-promise-only": "^0.8.1"
   },
   "devDependencies": {
     "ava": "^0.8.0",
     "express": "^4.13.4",
+    "selective-whitespace": "^1.0.0",
     "xo": "^0.12.1"
   },
   "ava": {
     "verbose": true
+  },
+  "xo": {
+    "rules": {
+      "linebreak-style": 0
+    }
   }
 }
