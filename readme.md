@@ -54,7 +54,7 @@ On windows, the output is the same as running `netstat.exe -a -n -o | findstr :<
 
 Returns a promise carrying the output array of line items.
 
-### port
+#### port
 
 Type: `number`  
 *Required*
