@@ -52,13 +52,12 @@ On windows, the output is the same as running `netstat.exe -a -n -o | findstr :<
 
 ### netstats(port)
 
-Get the netstat activity on a given port
-Returns: `Promise`
+Returns a promise carrying the output array of line items.
 
 ### port
 
-Type: `number`
-Required
+Type: `number`  
+*Required*
 
 The port number you are enquiring about.
 
