@@ -1,39 +1,30 @@
-'use strict';
-require('native-promise-only');
-var exec = require('child_process').exec;
+const util = require('util');
+const exec = util.promisify(require('child_process').exec);
 
 function command(port) {
-	var win = {
-		exe: '\\windows\\system32\\netstat.exe',
-		arg: ['-a -n -o ^| findstr :' + port],
-		cmd: '\\windows\\system32\\netstat.exe -a -n -o | findstr.exe :' + port
-	};
+  const win = {
+    exe: '\\windows\\system32\\netstat.exe',
+    arg: [`-a -n -o ^| findstr :${port}`],
+    cmd: `\\windows\\system32\\netstat.exe -a -n -o | findstr.exe :${port}`,
+  };
 
-	var dar = {
-		exe: 'lsof',
-		arg: ['-i', ':' + port],
-		cmd: 'lsof -i :' + port
-	};
+  const dar = {
+    exe: 'lsof',
+    arg: ['-i', `:${port}`],
+    cmd: `lsof -i :${port}`,
+  };
 
-	return process.platform === 'win32' ? win : dar;
+  return process.platform === 'win32' ? win : dar;
 }
 
-module.exports = function (port, opts) {
-	if (typeof port !== 'number') {
-		throw new TypeError('Expected a port number');
-	}
+function netstats(port) {
+  if (typeof port !== 'number') {
+    throw new TypeError('Expected a port number');
+  }
 
-	opts = opts || {};
+  const cmd = command(port);
 
-	return new Promise(function (resolve, reject) {
-		var cmd = command(port);
+  return exec(cmd.cmd).then(({ stdout }) => Promise.resolve(stdout.split('\n'))).catch(err => Promise.reject(err));
+}
 
-		exec(cmd.cmd, function (err, stdout, stderr) {
-			var _err = err || stderr;
-			if (_err) {
-				reject(_err);
-			}
-			resolve(stdout.split('\n'));
-		});
-	});
-};
+module.exports = netstats;
