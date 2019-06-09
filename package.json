@@ -1,6 +1,6 @@
 {
   "name": "netstats",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "description": "Get the netstat activity on a given port.",
   "license": "MIT",
   "repository": "radiovisual/netstats",
