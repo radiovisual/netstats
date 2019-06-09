@@ -63,4 +63,4 @@ The port number you are enquiring about.
 
 ## License
 
-MIT © [Michael Wuergler](http://numetriclabs.com)
+MIT © [Michael Wuergler](https://github.com/radiovisual)
