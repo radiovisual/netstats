@@ -1,9 +1,6 @@
-# netstats 
+# netstats [![Build Status](https://travis-ci.org/radiovisual/netstats.svg?branch=master)](https://travis-ci.org/radiovisual/netstats)
 
 > Get the netstat activity on a given port.
-
-[![Build Status](https://travis-ci.org/radiovisual/netstats.svg?branch=master)](https://travis-ci.org/radiovisual/netstats)
-
 
 ## Install
 
@@ -56,11 +53,11 @@ Returns a promise carrying the output array of line items.
 
 #### port
 
-Type: `number`  
+Type: `number`<br/>
 *Required*
 
 The port number you are enquiring about.
 
 ## License
 
-MIT © [Michael Wuergler](http://numetriclabs.com)
+MIT © [Michael Wuergler](https://github.com/radiovisual)

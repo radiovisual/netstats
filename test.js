@@ -1,29 +1,31 @@
-import test from 'ava';
-import netstats from './';
-import condense from 'selective-whitespace';
+/* eslint prefer-destructuring: 0 */
+const condense = require('selective-whitespace');
 
 const server = require('express')();
+const netstats = require('./index.js');
 
-test.beforeEach(t => {
-	const listener = server.listen(0);
-	t.context.listener = listener;
-	t.context.port = listener.address().port;
-	console.log('running test server on port: ', t.context.port);
-});
+let listener;
+let port;
 
-test('gets the netstats', async t => {
-	await netstats(t.context.port).then(stats => {
-		t.plan(3);
+describe('netstats', () => {
+  afterEach(() => {
+    listener.close();
+  });
 
-		const v = condense(stats[0]);
-		const value = v.split(' ')[0];
-		t.true(value === 'COMMAND' || value === 'TCP' || value === 'UDP');
-		t.true(stats.length > 0);
-		t.true(Array.isArray(stats));
-	});
-});
+  beforeEach(() => {
+    listener = server.listen(0);
+    port = listener.address().port;
+  });
 
-test.afterEach(t => {
-	t.context.listener.close();
-	console.log('closing test server on port: ', t.context.port);
+  test('gets the netstats', () => {
+    expect.assertions(3);
+
+    return netstats(port).then((stats) => {
+      const v = condense(stats[0]);
+      const value = v.split(' ')[0];
+      expect(value === 'COMMAND' || value === 'TCP' || value === 'UDP').toEqual(true);
+      expect(stats.length > 0).toEqual(true);
+      expect(Array.isArray(stats)).toEqual(true);
+    });
+  });
 });
