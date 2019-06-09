@@ -10,7 +10,7 @@
     "url": "https://github.com/radiovisual"
   },
   "engines": {
-    "node": ">=0.10.0"
+    "node": ">=8"
   },
   "scripts": {
     "test": "eslint index.js test.js && jest"
