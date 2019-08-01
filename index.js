@@ -1,11 +1,13 @@
 const util = require('util');
+const which = require('which');
 const exec = util.promisify(require('child_process').exec);
 
 function command(port) {
+  const winNetStat = which.sync('netstat');
   const win = {
-    exe: '\\windows\\system32\\netstat.exe',
+    exe: winNetStat,
     arg: [`-a -n -o ^| findstr :${port}`],
-    cmd: `\\windows\\system32\\netstat.exe -a -n -o | findstr.exe :${port}`,
+    cmd: `${winNetStat} -a -n -o | findstr.exe :${port}`,
   };
 
   const dar = {
